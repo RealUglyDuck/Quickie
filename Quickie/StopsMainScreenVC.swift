@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SecondViewController.swift
 //  Quickie
 //
 //  Created by Paweł Ambrożej on 15/02/2019.
@@ -8,10 +8,11 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class StopsMainScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .green
         // Do any additional setup after loading the view, typically from a nib.
     }
 

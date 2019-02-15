@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  FirstViewController.swift
 //  Quickie
 //
 //  Created by Paweł Ambrożej on 15/02/2019.
@@ -8,10 +8,12 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class JourneyMainScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .red
         // Do any additional setup after loading the view, typically from a nib.
     }
 
