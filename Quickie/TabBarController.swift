@@ -13,14 +13,16 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let journeyMainScreenVC = JourneyMainScreenVC()
-        let stopsMainScreenVC = StopsMainScreenVC()
-        let settingsVC = SettingsVC()
-        journeyMainScreenVC.tabBarItem = UITabBarItem(title: "Journey", image: nil, tag: 0)
-        stopsMainScreenVC.tabBarItem = UITabBarItem(title: "Buses", image: nil, tag: 1)
-        settingsVC.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 2)
-        
+        let journeyMainScreenVC = UINavigationController(rootViewController: JourneyMainScreenVC())
+        let stopsMainScreenVC = UINavigationController(rootViewController: StopsMainScreenVC())
+        let settingsVC = UINavigationController(rootViewController: SettingsVC())
+        journeyMainScreenVC.tabBarItem = UITabBarItem(title: "Journey", image: UIImage(named: ImageDatabase.mapMarkerIconActive), tag: 0)
+        stopsMainScreenVC.tabBarItem = UITabBarItem(title: "Buses", image: UIImage(named: ImageDatabase.busIcon), tag: 1)
+        settingsVC.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: ImageDatabase.settingsIcon), tag: 2)
+        self.tabBar.tintColor = ColorCollection.mainColor
         viewControllers = [journeyMainScreenVC,stopsMainScreenVC,settingsVC]
+        
+        
     }
 
 }

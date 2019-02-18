@@ -12,10 +12,16 @@ class StopsMainScreenVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
-        // Do any additional setup after loading the view, typically from a nib.
+        view.backgroundColor = .white
+        setupNavigationControllerApperance()
     }
 
+    func setupNavigationControllerApperance() {
+        navigationItem.title = "Stops"
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barTintColor = ColorCollection.mainColor
+    }
 
 }
 

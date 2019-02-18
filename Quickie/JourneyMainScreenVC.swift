@@ -13,8 +13,16 @@ class JourneyMainScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
+        setupNavigationControllerApperance()
+        view.backgroundColor = .white
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func setupNavigationControllerApperance() {
+        navigationItem.title = "Journey Planner"
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barTintColor = ColorCollection.mainColor
     }
 
 
