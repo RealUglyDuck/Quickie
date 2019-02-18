@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE5CDFCB221B2017003C40D8 /* UIColor - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5CDFCA221B2017003C40D8 /* UIColor - Extension.swift */; };
+		AE5CDFCE221B232E003C40D8 /* UIView - Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5CDFCD221B232E003C40D8 /* UIView - Extension.swift */; };
+		AE5CDFD0221B23EB003C40D8 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5CDFCF221B23EB003C40D8 /* SearchTextField.swift */; };
 		AED8EC9022172AF10049D80C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED8EC8F22172AF10049D80C /* AppDelegate.swift */; };
 		AED8EC9222172AF10049D80C /* JourneyMainScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED8EC9122172AF10049D80C /* JourneyMainScreenVC.swift */; };
 		AED8EC9422172AF10049D80C /* StopsMainScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED8EC9322172AF10049D80C /* StopsMainScreenVC.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE5CDFCA221B2017003C40D8 /* UIColor - Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor - Extension.swift"; sourceTree = "<group>"; };
+		AE5CDFCD221B232E003C40D8 /* UIView - Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView - Extension.swift"; sourceTree = "<group>"; };
+		AE5CDFCF221B23EB003C40D8 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		AED8EC8C22172AF10049D80C /* Quickie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quickie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AED8EC8F22172AF10049D80C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AED8EC9122172AF10049D80C /* JourneyMainScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyMainScreenVC.swift; sourceTree = "<group>"; };
@@ -45,6 +51,136 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE5CDFCC221B201C003C40D8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AE5CDFCD221B232E003C40D8 /* UIView - Extension.swift */,
+				AE5CDFCA221B2017003C40D8 /* UIColor - Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AE5CDFD1221B3092003C40D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AED8ECA72217376E0049D80C /* ImageDatabase.swift */,
+				AED8ECA92218CE210049D80C /* ColorCollection.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AE5CDFD2221B3097003C40D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AE5CDFD3221B309A003C40D8 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				AED8ECA322172D750049D80C /* TabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		AE5CDFD4221B35CD003C40D8 /* JourneyMain */ = {
+			isa = PBXGroup;
+			children = (
+				AE5CDFD7221B35DE003C40D8 /* Controller */,
+				AE5CDFD6221B35DA003C40D8 /* View */,
+				AE5CDFD5221B35D4003C40D8 /* Model */,
+			);
+			path = JourneyMain;
+			sourceTree = "<group>";
+		};
+		AE5CDFD5221B35D4003C40D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AE5CDFD6221B35DA003C40D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AE5CDFCF221B23EB003C40D8 /* SearchTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AE5CDFD7221B35DE003C40D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AED8EC9122172AF10049D80C /* JourneyMainScreenVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AE5CDFD8221B35F2003C40D8 /* StopsMain */ = {
+			isa = PBXGroup;
+			children = (
+				AE5CDFDC221B3625003C40D8 /* Controller */,
+				AE5CDFDB221B361C003C40D8 /* View */,
+				AE5CDFDA221B3615003C40D8 /* Model */,
+			);
+			path = StopsMain;
+			sourceTree = "<group>";
+		};
+		AE5CDFD9221B35FB003C40D8 /* SettingsMain */ = {
+			isa = PBXGroup;
+			children = (
+				AE5CDFDF221B3631003C40D8 /* Controller */,
+				AE5CDFDE221B362D003C40D8 /* View */,
+				AE5CDFDD221B3629003C40D8 /* Model */,
+			);
+			path = SettingsMain;
+			sourceTree = "<group>";
+		};
+		AE5CDFDA221B3615003C40D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AE5CDFDB221B361C003C40D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AE5CDFDC221B3625003C40D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AED8EC9322172AF10049D80C /* StopsMainScreenVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		AE5CDFDD221B3629003C40D8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AE5CDFDE221B362D003C40D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AE5CDFDF221B3631003C40D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AED8ECA522172DEA0049D80C /* SettingsVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		AED8EC8322172AF00049D80C = {
 			isa = PBXGroup;
 			children = (
@@ -64,17 +200,18 @@
 		AED8EC8E22172AF10049D80C /* Quickie */ = {
 			isa = PBXGroup;
 			children = (
+				AE5CDFD4221B35CD003C40D8 /* JourneyMain */,
+				AE5CDFD8221B35F2003C40D8 /* StopsMain */,
+				AE5CDFD9221B35FB003C40D8 /* SettingsMain */,
+				AE5CDFD3221B309A003C40D8 /* TabBar */,
+				AE5CDFD2221B3097003C40D8 /* View */,
+				AE5CDFD1221B3092003C40D8 /* Model */,
+				AE5CDFCC221B201C003C40D8 /* Extensions */,
 				AED8EC8F22172AF10049D80C /* AppDelegate.swift */,
-				AED8ECA322172D750049D80C /* TabBarController.swift */,
-				AED8EC9122172AF10049D80C /* JourneyMainScreenVC.swift */,
-				AED8EC9322172AF10049D80C /* StopsMainScreenVC.swift */,
-				AED8ECA522172DEA0049D80C /* SettingsVC.swift */,
 				AED8EC9522172AF10049D80C /* Main.storyboard */,
 				AED8EC9822172AF50049D80C /* Assets.xcassets */,
 				AED8EC9A22172AF50049D80C /* LaunchScreen.storyboard */,
 				AED8EC9D22172AF50049D80C /* Info.plist */,
-				AED8ECA72217376E0049D80C /* ImageDatabase.swift */,
-				AED8ECA92218CE210049D80C /* ColorCollection.swift */,
 			);
 			path = Quickie;
 			sourceTree = "<group>";
@@ -153,9 +290,12 @@
 				AED8EC9422172AF10049D80C /* StopsMainScreenVC.swift in Sources */,
 				AED8ECA82217376E0049D80C /* ImageDatabase.swift in Sources */,
 				AED8ECAA2218CE210049D80C /* ColorCollection.swift in Sources */,
+				AE5CDFCB221B2017003C40D8 /* UIColor - Extension.swift in Sources */,
 				AED8EC9022172AF10049D80C /* AppDelegate.swift in Sources */,
+				AE5CDFD0221B23EB003C40D8 /* SearchTextField.swift in Sources */,
 				AED8ECA422172D750049D80C /* TabBarController.swift in Sources */,
 				AED8EC9222172AF10049D80C /* JourneyMainScreenVC.swift in Sources */,
+				AE5CDFCE221B232E003C40D8 /* UIView - Extension.swift in Sources */,
 				AED8ECA622172DEA0049D80C /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

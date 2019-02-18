@@ -12,4 +12,5 @@ enum ImageDatabase {
     static let mapMarkerIconActive = "mapmarkericon"
     static let busIcon = "bus-icon"
     static let settingsIcon = "settings-icon"
+    static let departureDestinationIcon = "departureDestination-icon"
 }

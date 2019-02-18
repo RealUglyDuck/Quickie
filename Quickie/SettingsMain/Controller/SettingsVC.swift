@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SettingsVC.swift
 //  Quickie
 //
 //  Created by Paweł Ambrożej on 15/02/2019.
@@ -8,23 +8,19 @@
 
 import UIKit
 
-class JourneyMainScreenVC: UIViewController {
+class SettingsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = ColorCollection.backgroundColor
         setupNavigationControllerApperance()
-        view.backgroundColor = .white
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     func setupNavigationControllerApperance() {
-        navigationItem.title = "Journey Planner"
+        navigationItem.title = "Settings"
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.barTintColor = ColorCollection.mainColor
     }
 
-
 }
-
