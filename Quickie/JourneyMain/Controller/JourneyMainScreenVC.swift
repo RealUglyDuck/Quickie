@@ -9,7 +9,9 @@
 import UIKit
 
 class JourneyMainScreenVC: UIViewController {
-
+    
+    // MARK: ------------- PROPERTIES
+    
     let searchBar: UIView = {
         let bar = UIView()
         bar.backgroundColor = .white
@@ -35,19 +37,24 @@ class JourneyMainScreenVC: UIViewController {
         return imageView
     }()
     
-//    let tableView: UITableView = {
-//        let tableView = UITableView()
-//
-//        return tableView
-//    }()
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(AddressCell.self, forCellReuseIdentifier: CellIDs.addressCellID)
+        return tableView
+    }()
+    
+    // MARK: ------------- LIFECYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationControllerApperance()
         setupViews()
         view.backgroundColor = ColorCollection.backgroundColor
-        
+        tableView.delegate = self
+        tableView.dataSource = self
     }
+    
+    // MARK: ------------- SETUPS
     
     func setupNavigationControllerApperance() {
         navigationItem.title = "Journey Planner"
@@ -61,6 +68,7 @@ class JourneyMainScreenVC: UIViewController {
         searchBar.addSubview(departureTextField)
         searchBar.addSubview(destinationTextField)
         searchBar.addSubview(journeyImage)
+        view.addSubview(tableView)
         
         _ = searchBar.constraintAnchors(top: view.topAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: nil, topDistance: 0, leftDistance: 0, rightDistance: 0, bottomDistance: 0, height: 108, width: nil)
         
@@ -71,6 +79,8 @@ class JourneyMainScreenVC: UIViewController {
         departureTextField.setSize(width: nil, height: 40)
         
         _ = destinationTextField.constraintAnchors(top: nil, leading: searchBar.leadingAnchor, trailing: searchBar.trailingAnchor, bottom: searchBar.bottomAnchor, topDistance: 0, leftDistance: 30, rightDistance: 9, bottomDistance: 9, height: 40, width: nil)
+        
+        _ = tableView.constraintWithDistanceTo(top: searchBar.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: view.bottomAnchor, topDistance: 10, leftDistance: 15, rightDistance: 15, bottomDistance: 0)
     }
 
 }
