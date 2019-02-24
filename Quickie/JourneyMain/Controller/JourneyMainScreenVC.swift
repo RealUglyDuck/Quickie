@@ -40,6 +40,9 @@ class JourneyMainScreenVC: UIViewController {
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(AddressCell.self, forCellReuseIdentifier: CellIDs.addressCellID)
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+//        tableView.layer.masksToBounds = false
         return tableView
     }()
     

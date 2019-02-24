@@ -17,16 +17,16 @@ extension JourneyMainScreenVC: UITableViewDelegate {
         let header = HeaderView()
         return header
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 66
-    }
+//    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 66
+//    }
     
 }
 
 extension JourneyMainScreenVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 20
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
