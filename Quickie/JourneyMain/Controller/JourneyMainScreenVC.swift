@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import CoreLocation
 
-class JourneyMainScreenVC: UIViewController {
+class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     
     // MARK: ------------- PROPERTIES
+    
+    let locationManager = CLLocationManager()
     
     let searchBar: UIView = {
         let bar = UIView()
@@ -21,12 +24,14 @@ class JourneyMainScreenVC: UIViewController {
     let departureTextField: SearchTextField = {
         let departure = SearchTextField()
         departure.placeholder = "Departure"
+        departure.addTarget(self, action: #selector(presentPlaceSearchVC), for: .touchDown)
         return departure
     }()
     
     let destinationTextField: SearchTextField = {
         let destination = SearchTextField()
         destination.placeholder = "Destination"
+        destination.addTarget(self, action: #selector(presentPlaceSearchVC), for: .touchDown)
         return destination
     }()
     
@@ -39,10 +44,8 @@ class JourneyMainScreenVC: UIViewController {
     
     let tableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(AddressCell.self, forCellReuseIdentifier: CellIDs.addressCellID)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
-//        tableView.layer.masksToBounds = false
         return tableView
     }()
     
@@ -52,9 +55,27 @@ class JourneyMainScreenVC: UIViewController {
         super.viewDidLoad()
         setupNavigationControllerApperance()
         setupViews()
+        setupTableView()
         view.backgroundColor = ColorCollection.backgroundColor
-        tableView.delegate = self
-        tableView.dataSource = self
+        checkLocationServices()
+    }
+    
+    // MARK: ------------- ACTIONS
+    
+    @objc func presentPlaceSearchVC(sender: SearchTextField) {
+        
+        let controllerToPresent = PlaceSearchVC()
+        controllerToPresent.selectionDelegate = self
+        controllerToPresent.searchTextField.placeholder = sender.placeholder
+        controllerToPresent.title = sender.placeholder
+        
+        if sender.placeholder == "Departure" {
+            controllerToPresent.textFieldType = TextFieldType.departure
+        } else {
+            controllerToPresent.textFieldType = TextFieldType.destination
+        }
+        
+        navigationController?.pushViewController(controllerToPresent, animated: true)
     }
     
     // MARK: ------------- SETUPS
@@ -63,7 +84,16 @@ class JourneyMainScreenVC: UIViewController {
         navigationItem.title = "Journey Planner"
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = ColorCollection.mainColor
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
+    }
+    
+    func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(AddressCell.self, forCellReuseIdentifier: CellIDs.addressCellID)
+        tableView.register(CurrentLocationCell.self, forCellReuseIdentifier: CellIDs.locationCellID)
     }
     
     func setupViews() {
@@ -85,6 +115,69 @@ class JourneyMainScreenVC: UIViewController {
         
         _ = tableView.constraintWithDistanceTo(top: searchBar.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: view.bottomAnchor, topDistance: 10, leftDistance: 15, rightDistance: 15, bottomDistance: 0)
     }
+    
+    // MARK: ------------- LOCATION SERVICES
+    
+    func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            setupLocationManager()
+            checkLocationAuthorization()
+        } else {
+            
+        }
+    }
+    
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            break
+        case .denied:
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            break
+        case .authorizedAlways:
+            break
+        }
+    }
+    
+    func requestLocationAccess() {
+        let status = CLLocationManager.authorizationStatus()
+        
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("access granted")
+            return
+            
+        case .denied, .restricted:
+            print("location access denied")
+            
+        default:
+            print("requested")
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
 
 }
 
+extension JourneyMainScreenVC: PlaceSelectionDelegate {
+    func didSelectPlace(place: PlaceItem, textFieldType: TextFieldType) {
+        if textFieldType == .departure {
+            departureTextField.text = place.name
+        } else {
+            destinationTextField.text = place.name
+        }
+    }
+}
+
+enum TextFieldType {
+    case destination
+    case departure
+}

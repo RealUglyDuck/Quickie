@@ -12,16 +12,7 @@ class AddressCell: UITableViewCell {
 
     //#MARK: ----------- PROPERTIES
     
-    let bgView: UIView = {
-        let view = UIView()
-        view.layer.shadowColor = UIColor.lightGray.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.layer.masksToBounds = false
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 5
-        return view
-    
-    }()
+    lazy var bgView = CellBGView()
     
     let mainLabel: UILabel = {
         let label = UILabel()
@@ -29,7 +20,6 @@ class AddressCell: UITableViewCell {
         label.numberOfLines = 0
         label.textColor = ColorCollection.mainColor
         label.font = UIFont.systemFont(ofSize: 16)
-        
         return label
     }()
     
@@ -71,6 +61,7 @@ class AddressCell: UITableViewCell {
     //#MARK: ----------- SETUPS
     
     func setupViews() {
+        
         addSubview(bgView)
         bgView.addSubview(mainLabel)
         bgView.addSubview(detailsLabel)

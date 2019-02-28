@@ -14,30 +14,41 @@ extension JourneyMainScreenVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = HeaderView()
-        return header
+        if section == 1 {
+            let header = HeaderView()
+            return header
+        } else {
+            return UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0 ))
+        }
+        
     }
-//    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 66
-//    }
-    
 }
 
 extension JourneyMainScreenVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        if section == 0 {
+            return 0
+        } else {
+            return 20
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.addressCellID, for: indexPath) as? AddressCell else {
-            return UITableViewCell()
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.locationCellID, for: indexPath) as? CurrentLocationCell else {
+                return UITableViewCell()
+            }
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.addressCellID, for: indexPath) as? AddressCell else {
+                return UITableViewCell()
+            }
+            return cell
         }
-        return cell
     }
     
 }

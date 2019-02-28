@@ -17,7 +17,7 @@ class SearchTextField: UITextField {
         layer.masksToBounds = true
         layer.cornerRadius = 4
         font = UIFont.systemFont(ofSize: 14)
-        
+        keyboardType = .default
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 40))
         self.leftView = paddingView
         self.leftViewMode = .always
