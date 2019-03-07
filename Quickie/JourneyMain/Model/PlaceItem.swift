@@ -12,6 +12,6 @@ import MapKit
 
 public struct PlaceItem {
     let name: String
-    let detailedName: String
-    let placemark: MKPlacemark?
+    let detailedName: String?
+    let coordinate: CLLocationCoordinate2D?
 }

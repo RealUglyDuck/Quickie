@@ -15,4 +15,7 @@ enum ImageDatabase {
     static let departureDestinationIcon = "departureDestination-icon"
     static let favouriteIconActive = "star"
     static let locationIcon = "locationIcon"
+    static let searchOnMapIcon = "searchOnMap"
+    static let confirmIcon = "confirm"
+    static let mapPinIcon = "mapPinIcon"
 }

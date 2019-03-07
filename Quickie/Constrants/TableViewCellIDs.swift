@@ -10,5 +10,6 @@ import Foundation
 
 enum CellIDs {
     static let addressCellID = "addressCellID"
+    static let favouritesCellID = "favouritesCellID"
     static let locationCellID = "locationCellID"
 }
