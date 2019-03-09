@@ -31,7 +31,6 @@
 		AEE8F1CA222FE2BB0035D176 /* JourneyMainSearchCompleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE8F1C9222FE2BB0035D176 /* JourneyMainSearchCompleter.swift */; };
 		AEF2A98D2231945800D4ED61 /* LocationDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A98C2231945800D4ED61 /* LocationDatabase.swift */; };
 		AEF2A98F2231CC5F00D4ED61 /* SearchTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A98E2231CC5F00D4ED61 /* SearchTextFieldType.swift */; };
-		AEF2A99122342D4700D4ED61 /* UIViewController - Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A99022342D4700D4ED61 /* UIViewController - Extensions.swift */; };
 		AEF2A993223432E600D4ED61 /* JourneyOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A992223432E600D4ED61 /* JourneyOptionsVC.swift */; };
 		AEF2A995223433C100D4ED61 /* JourneyOptionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A994223433C100D4ED61 /* JourneyOptionsTableView.swift */; };
 		AEF2A9972234344700D4ED61 /* JourneyOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A9962234344600D4ED61 /* JourneyOptionCell.swift */; };
@@ -64,7 +63,6 @@
 		AEE8F1C9222FE2BB0035D176 /* JourneyMainSearchCompleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyMainSearchCompleter.swift; sourceTree = "<group>"; };
 		AEF2A98C2231945800D4ED61 /* LocationDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDatabase.swift; sourceTree = "<group>"; };
 		AEF2A98E2231CC5F00D4ED61 /* SearchTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldType.swift; sourceTree = "<group>"; };
-		AEF2A99022342D4700D4ED61 /* UIViewController - Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController - Extensions.swift"; sourceTree = "<group>"; };
 		AEF2A992223432E600D4ED61 /* JourneyOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyOptionsVC.swift; sourceTree = "<group>"; };
 		AEF2A994223433C100D4ED61 /* JourneyOptionsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyOptionsTableView.swift; sourceTree = "<group>"; };
 		AEF2A9962234344600D4ED61 /* JourneyOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyOptionCell.swift; sourceTree = "<group>"; };
@@ -86,7 +84,6 @@
 			children = (
 				AE5CDFCD221B232E003C40D8 /* UIView - Extension.swift */,
 				AE5CDFCA221B2017003C40D8 /* UIColor - Extension.swift */,
-				AEF2A99022342D4700D4ED61 /* UIViewController - Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -344,7 +341,6 @@
 				AE5CDFE7221B3CD3003C40D8 /* TableViewCellIDs.swift in Sources */,
 				AE391E0822230C1800F7F5A7 /* CurrentLocationCell.swift in Sources */,
 				AE5CDFD0221B23EB003C40D8 /* SearchTextField.swift in Sources */,
-				AEF2A99122342D4700D4ED61 /* UIViewController - Extensions.swift in Sources */,
 				AE5CDFE3221B39E1003C40D8 /* HeaderView.swift in Sources */,
 				AEF2A993223432E600D4ED61 /* JourneyOptionsVC.swift in Sources */,
 				AEF2A9972234344700D4ED61 /* JourneyOptionCell.swift in Sources */,
