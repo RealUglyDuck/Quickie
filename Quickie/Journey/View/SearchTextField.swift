@@ -19,6 +19,8 @@ class SearchTextField: UITextField {
         return mapButton
     }()
     
+    var textFieldType: SearchTextFieldType = .departure
+    
     override init(frame:CGRect) {
         super.init(frame: frame)
         backgroundColor = ColorCollection.backgroundColor
@@ -33,6 +35,11 @@ class SearchTextField: UITextField {
         self.leftViewMode = .always
         self.rightView = mapView
         self.rightViewMode = .always
+    }
+    
+    convenience init(type: SearchTextFieldType) {
+        self.init(frame: .zero)
+        textFieldType = type
     }
     
     required init?(coder aDecoder: NSCoder) {

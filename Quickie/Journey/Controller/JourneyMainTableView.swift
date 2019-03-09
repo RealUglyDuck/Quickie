@@ -41,14 +41,19 @@ extension JourneyMainScreenVC: UITableViewDelegate {
                 guard let response = response else { return }
                 
                 let location = response.mapItems[0].placemark
-
+                
                 let title = self.searchCompleter.results[indexPath.row].title
                 let subtitle = self.searchCompleter.results[indexPath.row].subtitle
                 let place = PlaceItem(name: title, detailedName: subtitle, coordinate: location.coordinate)
                 
-                self.activeSearchTextField?.text = subtitle
-                self.activeSearchTextField?.endEditing(true)
+                guard let textField = self.activeSearchTextField as? SearchTextField else { return }
                 
+                switch textField.textFieldType {
+                case .departure: self.departure = place
+                case .destination: self.destination = place
+                }
+                
+                self.updateTextFields()
             }
         }
     }

@@ -48,7 +48,7 @@ class MapSearchVC: UIViewController {
 
     var locationManager = CLLocationManager()
     var selectionDelegate: PlaceSelectionDelegate!
-    var textFieldType: TextFieldType = .destination
+    var textFieldType: SearchTextFieldType = .departure
     var previousLocation: CLLocation?
     let searchCompleter = MKLocalSearchCompleter()
     
@@ -78,18 +78,22 @@ class MapSearchVC: UIViewController {
     
     @objc func confirmButtonPressed() {
         
-        print(searchCompleter.results)
+        let results = searchCompleter.results
+        
+        if results.count == 0 {
+            return
+        }
         
         let request = MKLocalSearch.Request(completion: searchCompleter.results[0])
-        
         let search = MKLocalSearch(request: request)
         
         search.start { (response, error) in
             
             guard let response = response else { return }
             
+
+            
             let location = response.mapItems[0].placemark
-            print(location.coordinate)
             let title = self.searchCompleter.results[0].title
             let subtitle = self.searchCompleter.results[0].subtitle
             let place = PlaceItem(name: title, detailedName: subtitle, coordinate: location.coordinate)
@@ -158,5 +162,5 @@ extension MapSearchVC: MKMapViewDelegate {
 // MARK: ------------ PROTOCOLS
 
 protocol PlaceSelectionDelegate {
-    func didSelectPlace(place: PlaceItem, textFieldType: TextFieldType)
+    func didSelectPlace(place: PlaceItem, textFieldType: SearchTextFieldType)
 }

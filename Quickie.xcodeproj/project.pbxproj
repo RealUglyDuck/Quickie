@@ -30,6 +30,11 @@
 		AED8ECAA2218CE210049D80C /* ColorCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED8ECA92218CE210049D80C /* ColorCollection.swift */; };
 		AEE8F1CA222FE2BB0035D176 /* JourneyMainSearchCompleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE8F1C9222FE2BB0035D176 /* JourneyMainSearchCompleter.swift */; };
 		AEF2A98D2231945800D4ED61 /* LocationDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A98C2231945800D4ED61 /* LocationDatabase.swift */; };
+		AEF2A98F2231CC5F00D4ED61 /* SearchTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A98E2231CC5F00D4ED61 /* SearchTextFieldType.swift */; };
+		AEF2A99122342D4700D4ED61 /* UIViewController - Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A99022342D4700D4ED61 /* UIViewController - Extensions.swift */; };
+		AEF2A993223432E600D4ED61 /* JourneyOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A992223432E600D4ED61 /* JourneyOptionsVC.swift */; };
+		AEF2A995223433C100D4ED61 /* JourneyOptionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A994223433C100D4ED61 /* JourneyOptionsTableView.swift */; };
+		AEF2A9972234344700D4ED61 /* JourneyOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A9962234344600D4ED61 /* JourneyOptionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +63,11 @@
 		AED8ECA92218CE210049D80C /* ColorCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollection.swift; sourceTree = "<group>"; };
 		AEE8F1C9222FE2BB0035D176 /* JourneyMainSearchCompleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyMainSearchCompleter.swift; sourceTree = "<group>"; };
 		AEF2A98C2231945800D4ED61 /* LocationDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDatabase.swift; sourceTree = "<group>"; };
+		AEF2A98E2231CC5F00D4ED61 /* SearchTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldType.swift; sourceTree = "<group>"; };
+		AEF2A99022342D4700D4ED61 /* UIViewController - Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController - Extensions.swift"; sourceTree = "<group>"; };
+		AEF2A992223432E600D4ED61 /* JourneyOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyOptionsVC.swift; sourceTree = "<group>"; };
+		AEF2A994223433C100D4ED61 /* JourneyOptionsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyOptionsTableView.swift; sourceTree = "<group>"; };
+		AEF2A9962234344600D4ED61 /* JourneyOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyOptionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +86,7 @@
 			children = (
 				AE5CDFCD221B232E003C40D8 /* UIView - Extension.swift */,
 				AE5CDFCA221B2017003C40D8 /* UIColor - Extension.swift */,
+				AEF2A99022342D4700D4ED61 /* UIViewController - Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -106,20 +117,21 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		AE5CDFD4221B35CD003C40D8 /* JourneyMain */ = {
+		AE5CDFD4221B35CD003C40D8 /* Journey */ = {
 			isa = PBXGroup;
 			children = (
 				AE5CDFD7221B35DE003C40D8 /* Controller */,
 				AE5CDFD6221B35DA003C40D8 /* View */,
 				AE5CDFD5221B35D4003C40D8 /* Model */,
 			);
-			path = JourneyMain;
+			path = Journey;
 			sourceTree = "<group>";
 		};
 		AE5CDFD5221B35D4003C40D8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				AEAA398C222857BA00D50A46 /* PlaceItem.swift */,
+				AEF2A98E2231CC5F00D4ED61 /* SearchTextFieldType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -132,6 +144,7 @@
 				AE5CDFE4221B3AC8003C40D8 /* AddressCell.swift */,
 				AE391E0722230C1800F7F5A7 /* CurrentLocationCell.swift */,
 				AE391E0922230C5C00F7F5A7 /* CellBGView.swift */,
+				AEF2A9962234344600D4ED61 /* JourneyOptionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -143,6 +156,8 @@
 				AE5CDFE0221B36D3003C40D8 /* JourneyMainTableView.swift */,
 				AEE8F1C9222FE2BB0035D176 /* JourneyMainSearchCompleter.swift */,
 				AEAA398622247C4200D50A46 /* MapSearchVC.swift */,
+				AEF2A992223432E600D4ED61 /* JourneyOptionsVC.swift */,
+				AEF2A994223433C100D4ED61 /* JourneyOptionsTableView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -230,7 +245,7 @@
 		AED8EC8E22172AF10049D80C /* Quickie */ = {
 			isa = PBXGroup;
 			children = (
-				AE5CDFD4221B35CD003C40D8 /* JourneyMain */,
+				AE5CDFD4221B35CD003C40D8 /* Journey */,
 				AE5CDFD8221B35F2003C40D8 /* StopsMain */,
 				AE5CDFD9221B35FB003C40D8 /* SettingsMain */,
 				AE5CDFD3221B309A003C40D8 /* TabBar */,
@@ -324,15 +339,20 @@
 				AED8ECA82217376E0049D80C /* ImageDatabase.swift in Sources */,
 				AED8ECAA2218CE210049D80C /* ColorCollection.swift in Sources */,
 				AE5CDFCB221B2017003C40D8 /* UIColor - Extension.swift in Sources */,
+				AEF2A98F2231CC5F00D4ED61 /* SearchTextFieldType.swift in Sources */,
 				AED8EC9022172AF10049D80C /* AppDelegate.swift in Sources */,
 				AE5CDFE7221B3CD3003C40D8 /* TableViewCellIDs.swift in Sources */,
 				AE391E0822230C1800F7F5A7 /* CurrentLocationCell.swift in Sources */,
 				AE5CDFD0221B23EB003C40D8 /* SearchTextField.swift in Sources */,
+				AEF2A99122342D4700D4ED61 /* UIViewController - Extensions.swift in Sources */,
 				AE5CDFE3221B39E1003C40D8 /* HeaderView.swift in Sources */,
+				AEF2A993223432E600D4ED61 /* JourneyOptionsVC.swift in Sources */,
+				AEF2A9972234344700D4ED61 /* JourneyOptionCell.swift in Sources */,
 				AEAA398722247C4200D50A46 /* MapSearchVC.swift in Sources */,
 				AED8ECA422172D750049D80C /* TabBarController.swift in Sources */,
 				AED8EC9222172AF10049D80C /* JourneyMainScreenVC.swift in Sources */,
 				AE5CDFCE221B232E003C40D8 /* UIView - Extension.swift in Sources */,
+				AEF2A995223433C100D4ED61 /* JourneyOptionsTableView.swift in Sources */,
 				AED8ECA622172DEA0049D80C /* SettingsVC.swift in Sources */,
 				AE5CDFE5221B3AC8003C40D8 /* AddressCell.swift in Sources */,
 				AE391E0A22230C5C00F7F5A7 /* CellBGView.swift in Sources */,

@@ -1,17 +1,15 @@
 //
-//  AddressCell.swift
+//  JourneyOptionCell.swift
 //  Quickie
 //
-//  Created by Paweł Ambrożej on 18/02/2019.
+//  Created by Paweł Ambrożej on 09/03/2019.
 //  Copyright © 2019 Pawel Ambrozej. All rights reserved.
 //
 
 import UIKit
 
-class AddressCell: UITableViewCell {
+class JourneyOptionCell: UITableViewCell {
 
-    //#MARK: ----------- PROPERTIES
-    
     lazy var bgView = CellBGView()
     
     let mainLabel: UILabel = {
@@ -31,11 +29,13 @@ class AddressCell: UITableViewCell {
         return label
     }()
     
-    let favouriteButton: UIImageView = {
-        let favourite = UIImageView()
-        favourite.image = UIImage(named: ImageDatabase.favouriteIconActive)
-        favourite.contentMode = .scaleAspectFit
-        return favourite
+    let totalTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "52 min"
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = ColorCollection.mainColor
+        label.textAlignment = .right
+        return label
     }()
     
     //#MARK: ----------- INITIALIZATION
@@ -58,30 +58,22 @@ class AddressCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //#MARK: ----------- SETUPS
-    
     func setupViews() {
         
         addSubview(bgView)
         bgView.addSubview(mainLabel)
         bgView.addSubview(detailsLabel)
-        bgView.addSubview(favouriteButton)
+        bgView.addSubview(totalTimeLabel)
         
-        favouriteButton.translatesAutoresizingMaskIntoConstraints = false
-        favouriteButton.setSize(width: 20, height: 20)
-        favouriteButton.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -15).isActive = true
-        favouriteButton.centerYAnchor.constraint(equalTo: bgView.centerYAnchor).isActive = true
+        totalTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        totalTimeLabel.setSize(width: 70, height: 20)
+        totalTimeLabel.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -15).isActive = true
+        totalTimeLabel.centerYAnchor.constraint(equalTo: bgView.centerYAnchor).isActive = true
         
         _ = bgView.constraintWithDistanceTo(top: topAnchor, leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, topDistance: 7.5, leftDistance: 0, rightDistance: 0, bottomDistance: 7.5)
-        _ = mainLabel.constraintWithDistanceTo(top: bgView.topAnchor, leading: bgView.leadingAnchor, trailing: favouriteButton.leadingAnchor, bottom: detailsLabel.topAnchor, topDistance: 13, leftDistance: 13, rightDistance: 15, bottomDistance: 5)
+        _ = mainLabel.constraintWithDistanceTo(top: bgView.topAnchor, leading: bgView.leadingAnchor, trailing: totalTimeLabel.leadingAnchor, bottom: detailsLabel.topAnchor, topDistance: 13, leftDistance: 13, rightDistance: 15, bottomDistance: 5)
         _ = detailsLabel.constraintWithDistanceTo(top: nil, leading: mainLabel.leadingAnchor, trailing: mainLabel.trailingAnchor, bottom: bgView.bottomAnchor, topDistance: 0, leftDistance: 0, rightDistance: 0, bottomDistance: 13)
         
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

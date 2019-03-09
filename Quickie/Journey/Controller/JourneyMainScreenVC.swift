@@ -26,19 +26,21 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     }()
     
     lazy var departureTextField: SearchTextField = {
-        let departure = SearchTextField()
+        let departure = SearchTextField(type: .departure)
         departure.placeholder = "Departure"
         departure.text = self.departure?.name
         departure.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         departure.mapButton.addTarget(self, action: #selector(presentMapSearchVC(sender:)), for: .touchUpInside)
+        departure.textFieldType = .departure
         return departure
     }()
     
     let destinationTextField: SearchTextField = {
-        let destination = SearchTextField()
+        let destination = SearchTextField(type: .destination)
         destination.placeholder = "Destination"
         destination.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         destination.mapButton.addTarget(self, action: #selector(presentMapSearchVC(sender:)), for: .touchUpInside)
+        destination.textFieldType = .destination
         return destination
     }()
     
@@ -69,6 +71,7 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
         setupTextFields()
         checkLocationServices()
         setCurrentLocation()
+//        hideKeyboardWhenTappedAround()
     }
     
     // MARK: ------------- ACTIONS
@@ -80,6 +83,7 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
         
         let departure = PlaceItem(name: "Current Location", detailedName: "", coordinate: currentLocation)
         self.departure = departure
+        updateTextFields()
     }
     
     @objc func presentMapSearchVC(sender: UIButton) {
@@ -90,10 +94,11 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
             controllerToPresent.searchTextField.placeholder = superview.placeholder
             controllerToPresent.title = superview.placeholder
             
-            if superview.placeholder == "Departure" {
-                controllerToPresent.textFieldType = TextFieldType.departure
-            } else {
-                controllerToPresent.textFieldType = TextFieldType.destination
+            switch superview.textFieldType {
+            case .departure:
+                controllerToPresent.textFieldType = SearchTextFieldType.departure
+            case .destination:
+                controllerToPresent.textFieldType = SearchTextFieldType.destination
             }
             
             navigationController?.pushViewController(controllerToPresent, animated: true)
@@ -110,6 +115,11 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func updateTextFields() {
+        departureTextField.text = departure?.name
+        destinationTextField.text = destination?.name
+    }
+    
     // MARK: ------------- SETUPS
     
     func setupNavigationControllerApperance() {
@@ -118,7 +128,20 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = ColorCollection.mainColor
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonPressed))
+        
+    }
+    
+    @objc func searchButtonPressed() {
+        
+        guard let departure = departure, let destination = destination else { return }
+        
+        if departure.name == "" || destination.name == "" {
+            return
+        }
+        
+        let journeyOptionsVC = JourneyOptionsVC(departure: departure, destination: destination)
+        navigationController?.pushViewController(journeyOptionsVC, animated: true)
     }
     
     func setupMKLocalSearchCompleter() {
@@ -227,12 +250,13 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
 
 
 extension JourneyMainScreenVC: PlaceSelectionDelegate {
-    func didSelectPlace(place: PlaceItem, textFieldType: TextFieldType) {
+    func didSelectPlace(place: PlaceItem, textFieldType: SearchTextFieldType) {
         if textFieldType == .departure {
-            departureTextField.text = place.name
+            departure = place
         } else {
-            destinationTextField.text = place.name
+            destination = place
         }
+        updateTextFields()
     }
 }
 
@@ -257,7 +281,4 @@ extension JourneyMainScreenVC: UITextFieldDelegate {
 
 }
 
-enum TextFieldType {
-    case destination
-    case departure
-}
+
