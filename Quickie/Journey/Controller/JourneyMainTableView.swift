@@ -27,9 +27,22 @@ extension JourneyMainScreenVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let textField = self.activeSearchTextField as? SearchTextField else { return }
+        
         if indexPath.section == 0 {
-            self.activeSearchTextField?.text = "Current Location"
+            
+            guard let location = locationManager.location?.coordinate else { return }
+            
+            let place = PlaceItem(name: "Current Location", detailedName: "", coordinate: location)
+            
+            switch textField.textFieldType {
+            case .departure: self.departure = place
+            case .destination: self.destination = place
+            }
+            
             self.activeSearchTextField?.endEditing(true)
+            self.updateTextFields()
         }
         
         if indexPath.section == 1 {
@@ -40,13 +53,9 @@ extension JourneyMainScreenVC: UITableViewDelegate {
                 
                 guard let response = response else { return }
                 
-                let location = response.mapItems[0].placemark
-                
-                let title = self.searchCompleter.results[indexPath.row].title
-                let subtitle = self.searchCompleter.results[indexPath.row].subtitle
-                let place = PlaceItem(name: title, detailedName: subtitle, coordinate: location.coordinate)
-                
-                guard let textField = self.activeSearchTextField as? SearchTextField else { return }
+                let placemark = response.mapItems[0].placemark
+                let searchCompletion = self.searchCompleter.results[indexPath.row]
+                let place = PlaceItem(searchCompletion: searchCompletion, placemark: placemark)
                 
                 switch textField.textFieldType {
                 case .departure: self.departure = place
@@ -54,6 +63,8 @@ extension JourneyMainScreenVC: UITableViewDelegate {
                 }
                 
                 self.updateTextFields()
+                self.activeSearchTextField?.endEditing(true)
+                
             }
         }
     }
@@ -76,8 +87,12 @@ extension JourneyMainScreenVC: UITableViewDataSource {
             return searchCompleter.results.count
             
         } else {
-            
-            return 10
+            guard let places = favouritesDataManager.favouritePlaces else { return 0 }
+            if places.count == 0 {
+                return 0
+            } else {
+                return places.count
+            }
         }
     }
     
@@ -101,12 +116,16 @@ extension JourneyMainScreenVC: UITableViewDataSource {
                 let place = searchCompleter.results[indexPath.row]
                 cell.mainLabel.text = place.title
                 cell.detailsLabel.text = place.subtitle
+                cell.favouriteButtonArea.addTarget(self, action: #selector(favouritesButtonPressed(sender:)), for: .touchUpInside)
                 return cell
             
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.favouritesCellID, for: indexPath) as? AddressCell else {
-                return UITableViewCell()
-            }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.favouritesCellID, for: indexPath) as? AddressCell else { return UITableViewCell() }
+            
+            guard let places = favouritesDataManager.favouritePlaces else { return UITableViewCell() }
+            let place = places[indexPath.row]
+            cell.mainLabel.text = place.name
+            cell.detailsLabel.text = place.subtitle
             return cell
         }
         return UITableViewCell()

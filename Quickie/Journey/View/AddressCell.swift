@@ -10,6 +10,9 @@ import UIKit
 
 class AddressCell: UITableViewCell {
 
+    var isFavourite = false
+    var place: PlaceItem?
+    
     //#MARK: ----------- PROPERTIES
     
     lazy var bgView = CellBGView()
@@ -31,15 +34,14 @@ class AddressCell: UITableViewCell {
         return label
     }()
     
-    let favouriteButton: UIImageView = {
+    let favouriteImageView: UIImageView = {
         let favourite = UIImageView()
         favourite.image = UIImage(named: ImageDatabase.favouriteIconActive)
         favourite.contentMode = .scaleAspectFit
-        let button = UIButton()
-        favourite.addSubview(button)
-        button.constraintToSuperView()
         return favourite
     }()
+    
+    let favouriteButtonArea = UIButton()
     
     //#MARK: ----------- INITIALIZATION
     
@@ -57,6 +59,11 @@ class AddressCell: UITableViewCell {
         backgroundColor = .clear
     }
     
+    func configureCell(place: PlaceItem) {
+        self.place = place
+        mainLabel.text = place.name
+        detailsLabel.text = place.detailedName
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -69,16 +76,19 @@ class AddressCell: UITableViewCell {
         addSubview(bgView)
         bgView.addSubview(mainLabel)
         bgView.addSubview(detailsLabel)
-        bgView.addSubview(favouriteButton)
+        bgView.addSubview(favouriteImageView)
+        bgView.addSubview(favouriteButtonArea)
         
-        favouriteButton.translatesAutoresizingMaskIntoConstraints = false
-        favouriteButton.setSize(width: 20, height: 20)
-        favouriteButton.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -15).isActive = true
-        favouriteButton.centerYAnchor.constraint(equalTo: bgView.centerYAnchor).isActive = true
+        favouriteImageView.translatesAutoresizingMaskIntoConstraints = false
+        favouriteImageView.setSize(width: 20, height: 20)
+        favouriteImageView.trailingAnchor.constraint(equalTo: bgView.trailingAnchor, constant: -15).isActive = true
+        favouriteImageView.centerYAnchor.constraint(equalTo: bgView.centerYAnchor).isActive = true
         
         _ = bgView.constraintWithDistanceTo(top: topAnchor, leading: leadingAnchor, trailing: trailingAnchor, bottom: bottomAnchor, topDistance: 7.5, leftDistance: 0, rightDistance: 0, bottomDistance: 7.5)
-        _ = mainLabel.constraintWithDistanceTo(top: bgView.topAnchor, leading: bgView.leadingAnchor, trailing: favouriteButton.leadingAnchor, bottom: detailsLabel.topAnchor, topDistance: 13, leftDistance: 13, rightDistance: 15, bottomDistance: 5)
+        _ = mainLabel.constraintWithDistanceTo(top: bgView.topAnchor, leading: bgView.leadingAnchor, trailing: favouriteImageView.leadingAnchor, bottom: detailsLabel.topAnchor, topDistance: 13, leftDistance: 13, rightDistance: 15, bottomDistance: 5)
         _ = detailsLabel.constraintWithDistanceTo(top: nil, leading: mainLabel.leadingAnchor, trailing: mainLabel.trailingAnchor, bottom: bgView.bottomAnchor, topDistance: 0, leftDistance: 0, rightDistance: 0, bottomDistance: 13)
+        favouriteButtonArea.centerInTheView(centerX: favouriteImageView.centerXAnchor, centerY: favouriteImageView.centerYAnchor)
+        favouriteButtonArea.setSize(width: 40, height: 40)
         
     }
     

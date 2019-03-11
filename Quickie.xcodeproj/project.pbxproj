@@ -34,6 +34,8 @@
 		AEF2A993223432E600D4ED61 /* JourneyOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A992223432E600D4ED61 /* JourneyOptionsVC.swift */; };
 		AEF2A995223433C100D4ED61 /* JourneyOptionsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A994223433C100D4ED61 /* JourneyOptionsTableView.swift */; };
 		AEF2A9972234344700D4ED61 /* JourneyOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A9962234344600D4ED61 /* JourneyOptionCell.swift */; };
+		AEF2A99A22346C0A00D4ED61 /* QuickieDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A99822346C0A00D4ED61 /* QuickieDataModel.xcdatamodeld */; };
+		AEF2A99C2234748C00D4ED61 /* FavouritesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF2A99B2234748C00D4ED61 /* FavouritesDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		AEF2A992223432E600D4ED61 /* JourneyOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyOptionsVC.swift; sourceTree = "<group>"; };
 		AEF2A994223433C100D4ED61 /* JourneyOptionsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyOptionsTableView.swift; sourceTree = "<group>"; };
 		AEF2A9962234344600D4ED61 /* JourneyOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyOptionCell.swift; sourceTree = "<group>"; };
+		AEF2A99922346C0A00D4ED61 /* QuickieDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QuickieDataModel.xcdatamodel; sourceTree = "<group>"; };
+		AEF2A99B2234748C00D4ED61 /* FavouritesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +133,7 @@
 			children = (
 				AEAA398C222857BA00D50A46 /* PlaceItem.swift */,
 				AEF2A98E2231CC5F00D4ED61 /* SearchTextFieldType.swift */,
+				AEF2A99B2234748C00D4ED61 /* FavouritesDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 				AE5CDFD2221B3097003C40D8 /* View */,
 				AE5CDFD1221B3092003C40D8 /* Constrants */,
 				AE5CDFCC221B201C003C40D8 /* Extensions */,
+				AEF2A99822346C0A00D4ED61 /* QuickieDataModel.xcdatamodeld */,
 				AED8EC8F22172AF10049D80C /* AppDelegate.swift */,
 				AED8EC9522172AF10049D80C /* Main.storyboard */,
 				AED8EC9822172AF50049D80C /* Assets.xcassets */,
@@ -332,6 +338,7 @@
 				AE5CDFE1221B36D3003C40D8 /* JourneyMainTableView.swift in Sources */,
 				AED8EC9422172AF10049D80C /* StopsMainScreenVC.swift in Sources */,
 				AEE8F1CA222FE2BB0035D176 /* JourneyMainSearchCompleter.swift in Sources */,
+				AEF2A99C2234748C00D4ED61 /* FavouritesDataManager.swift in Sources */,
 				AEF2A98D2231945800D4ED61 /* LocationDatabase.swift in Sources */,
 				AED8ECA82217376E0049D80C /* ImageDatabase.swift in Sources */,
 				AED8ECAA2218CE210049D80C /* ColorCollection.swift in Sources */,
@@ -352,6 +359,7 @@
 				AED8ECA622172DEA0049D80C /* SettingsVC.swift in Sources */,
 				AE5CDFE5221B3AC8003C40D8 /* AddressCell.swift in Sources */,
 				AE391E0A22230C5C00F7F5A7 /* CellBGView.swift in Sources */,
+				AEF2A99A22346C0A00D4ED61 /* QuickieDataModel.xcdatamodeld in Sources */,
 				AEAA398D222857BA00D50A46 /* PlaceItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,6 +560,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AEF2A99822346C0A00D4ED61 /* QuickieDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AEF2A99922346C0A00D4ED61 /* QuickieDataModel.xcdatamodel */,
+			);
+			currentVersion = AEF2A99922346C0A00D4ED61 /* QuickieDataModel.xcdatamodel */;
+			path = QuickieDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AED8EC8422172AF00049D80C /* Project object */;
 }

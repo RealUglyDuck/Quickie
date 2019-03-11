@@ -11,7 +11,22 @@ import CoreLocation
 import MapKit
 
 public struct PlaceItem {
-    let name: String
+    let name: String?
     let detailedName: String?
-    let coordinate: CLLocationCoordinate2D?
+    let latitude: Double?
+    let longitude: Double?
+    
+    init(name: String, detailedName: String, coordinate: CLLocationCoordinate2D) {
+        self.name = name
+        self.detailedName = detailedName
+        self.latitude = coordinate.latitude
+        self.longitude = coordinate.longitude
+    }
+    
+    init(searchCompletion: MKLocalSearchCompletion, placemark: MKPlacemark) {
+        self.name = searchCompletion.title
+        self.detailedName = searchCompletion.subtitle
+        self.latitude = placemark.coordinate.latitude
+        self.longitude = placemark.coordinate.longitude
+    }
 }

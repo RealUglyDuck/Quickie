@@ -9,11 +9,14 @@
 import UIKit
 import CoreLocation
 import MapKit
+import CoreData
 
 class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     
     // MARK: ------------- PROPERTIES
     
+    
+    let favouritesDataManager = FavouritesDataManager()
     var activeSearchTextField: UITextField?
     let locationManager = CLLocationManager()
     var departure: PlaceItem?
@@ -64,6 +67,7 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupNavigationControllerApperance()
         setupViews()
         setupTableView()
@@ -71,7 +75,8 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
         setupTextFields()
         checkLocationServices()
         setCurrentLocation()
-//        hideKeyboardWhenTappedAround()
+        
+
     }
     
     // MARK: ------------- ACTIONS
@@ -88,6 +93,10 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     
     @objc func presentMapSearchVC(sender: UIButton) {
         
+        activeSearchTextField?.endEditing(true)
+        activeSearchTextField = nil
+        
+        
         if let superview = sender.superview as? SearchTextField {
             let controllerToPresent = MapSearchVC()
             controllerToPresent.selectionDelegate = self
@@ -102,6 +111,24 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
             }
             
             navigationController?.pushViewController(controllerToPresent, animated: true)
+        }
+    }
+    
+    @objc func favouritesButtonPressed(sender: UIButton) {
+        if let cell = sender.superview?.superview as? AddressCell {
+            guard let indexPath = tableView.indexPath(for: cell) else { return }
+            let request = MKLocalSearch.Request(completion: searchCompleter.results[indexPath.row])
+            let search = MKLocalSearch(request: request)
+            
+            search.start { (response, error) in
+                
+                guard let response = response else { return }
+                
+                let placemark = response.mapItems[0].placemark
+                let searchCompletion = self.searchCompleter.results[indexPath.row]
+                let place = PlaceItem(searchCompletion: searchCompletion, placemark: placemark)
+                self.favouritesDataManager.addPlace(place,completionHandler: self.tableView.reloadData)
+            }
         }
     }
     
@@ -244,7 +271,7 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
-
+    
 }
 
 
