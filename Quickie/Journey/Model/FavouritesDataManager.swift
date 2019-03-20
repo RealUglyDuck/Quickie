@@ -8,6 +8,7 @@
 
 import CoreData
 import UIKit
+import MapKit
 
 class FavouritesDataManager {
     
@@ -25,8 +26,8 @@ class FavouritesDataManager {
     func addPlace(_ place: PlaceItem,  completionHandler: @escaping ()->()) {
         
         let favouritePlace = FavouritePlace(context: context)
-        favouritePlace.name = place.name
-        favouritePlace.subtitle = place.detailedName
+        favouritePlace.name = place.title
+        favouritePlace.subtitle = place.subtitle
         favouritePlace.latitude = place.latitude ?? 0
         favouritePlace.longitude = place.longitude ?? 0
         
@@ -37,6 +38,29 @@ class FavouritesDataManager {
         } catch let error as NSError {
             print("Couldn't save the data. \(error)")
         }
+    }
+    
+    func getFavouritePlace(_ name: String) -> PlaceItem? {
+        let request: NSFetchRequest<FavouritePlace> = NSFetchRequest(entityName: "FavouritePlace")
+        let predicate = NSPredicate(format: "name = %@", name)
+        
+        request.predicate = predicate
+        
+        do {
+            let objects = try context.fetch(request)
+            if objects.count > 0 {
+                let favouriteObject = objects[0]
+                let place = PlaceItem(name: favouriteObject.name ?? "", detailedName: favouriteObject.subtitle ?? "", coordinate: CLLocationCoordinate2D(latitude: favouriteObject.latitude, longitude: favouriteObject.longitude))
+                return place
+            } else {
+                return nil
+            }
+            
+        } catch let error as NSError {
+            print("Couldn't read the data,. \(error)")
+            
+        }
+        return nil
     }
     
     func readData() -> [FavouritePlace]? {

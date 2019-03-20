@@ -22,12 +22,15 @@ class MapSearchVC: UIViewController {
     
     let searchTextField: SearchTextField = {
         let textField = SearchTextField()
-        textField.placeholder = "Departure"
+        textField.text = "Current Location"
+        textField.rightViewMode = .always
         let image = UIImage(named: ImageDatabase.confirmIcon)
         textField.mapButton.frame = CGRect(x: 0, y: 0, width: 26, height: 26)
         textField.mapButton.imageView?.contentMode = .scaleAspectFit
         textField.mapButton.setBackgroundImage(image, for: .normal)
+        textField.mapButton.setBackgroundImage(image, for: .highlighted)
         textField.mapButton.addTarget(self, action: #selector(confirmButtonPressed), for: .touchDown)
+        
         return textField
     }()
     
@@ -36,6 +39,7 @@ class MapSearchVC: UIViewController {
         let currentLocation = locationManager.location?.coordinate
         let image = UIImage(named: ImageDatabase.mapPinIcon)
         let mapPinIcon = UIImageView(image: image)
+        mapView.showsUserLocation = true
         
         mapView.region = MKCoordinateRegion(center: currentLocation ?? LocationDatabase.londonLocation, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
         mapView.addSubview(mapPinIcon)
@@ -64,7 +68,7 @@ class MapSearchVC: UIViewController {
         setupViews()
         mapView.delegate = self
         previousLocation = getCenterLocation(for: mapView)
-        
+        searchTextField.text = "Current Location"
     }
     
     // MARK: ---------- TEXTFIELD
@@ -91,12 +95,10 @@ class MapSearchVC: UIViewController {
             
             guard let response = response else { return }
             
-
-            
             let location = response.mapItems[0].placemark
-            let title = self.searchCompleter.results[0].title
-            let subtitle = self.searchCompleter.results[0].subtitle
-            let place = PlaceItem(name: title, detailedName: subtitle, coordinate: location.coordinate)
+            let title = response.mapItems[0].name
+            let subtitle = response.mapItems[0].placemark.title
+            let place = PlaceItem(name: title ?? "", detailedName: subtitle ?? "", coordinate: location.coordinate)
             
             self.selectionDelegate.didSelectPlace(place: place, textFieldType: self.textFieldType)
             self.navigationController?.popToRootViewController(animated: true)

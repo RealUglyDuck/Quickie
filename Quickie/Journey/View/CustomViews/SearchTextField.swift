@@ -8,6 +8,11 @@
 
 import UIKit
 
+public enum SearchTextFieldType {
+    case destination
+    case departure
+}
+
 class SearchTextField: UITextField {
     
     let mapButton: UIButton = {
@@ -15,6 +20,7 @@ class SearchTextField: UITextField {
         let button = UIButton()
         let mapButton = UIButton(frame: CGRect(x: 0, y: 0, width: 22, height: 24))
         mapButton.setBackgroundImage(image, for: .normal)
+        mapButton.setBackgroundImage(image, for: .highlighted)
         mapButton.contentMode = .center
         return mapButton
     }()
@@ -34,7 +40,9 @@ class SearchTextField: UITextField {
         self.leftView = paddingView
         self.leftViewMode = .always
         self.rightView = mapView
-        self.rightViewMode = .always
+        self.rightViewMode = .whileEditing
+//        self.clearButtonMode = ViewMode.whileEditing
+        
     }
     
     convenience init(type: SearchTextFieldType) {

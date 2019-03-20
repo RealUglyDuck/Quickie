@@ -29,8 +29,9 @@ extension JourneyMainScreenVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let textField = self.activeSearchTextField as? SearchTextField else { return }
+        let section = indexPath.section
         
-        if indexPath.section == 0 {
+        if section == 0 {
             
             guard let location = locationManager.location?.coordinate else { return }
             
@@ -45,25 +46,55 @@ extension JourneyMainScreenVC: UITableViewDelegate {
             self.updateTextFields()
         }
         
-        if indexPath.section == 1 {
+        if section == 1 {
+            
             let request = MKLocalSearch.Request(completion: searchCompleter.results[indexPath.row])
             let search = MKLocalSearch(request: request)
             
+            
             search.start { (response, error) in
-                
+
                 guard let response = response else { return }
-                
-                let placemark = response.mapItems[0].placemark
-                let searchCompletion = self.searchCompleter.results[indexPath.row]
-                let place = PlaceItem(searchCompletion: searchCompletion, placemark: placemark)
-                
-                switch textField.textFieldType {
-                case .departure: self.departure = place
-                case .destination: self.destination = place
+                guard let activeSearchTextField = self.activeSearchTextField as? SearchTextField else { return }
+
+                if response.mapItems.count > 1 {
+                    let nearbyController = NearbyLocationsVC()
+                    nearbyController.mapItems = response.mapItems
+                    nearbyController.querry = self.searchCompleter.results[indexPath.row].title
+                    nearbyController.textFieldType = activeSearchTextField.textFieldType
+                    nearbyController.selectionDelegate = self
+                    self.activeSearchTextField?.endEditing(true)
+                    self.updateTextFields()
+                    self.navigationController?.pushViewController(nearbyController, animated: true)
+                } else {
+                    let placemark = response.mapItems[0].placemark
+                    let searchCompletion = self.searchCompleter.results[indexPath.row]
+                    let place = PlaceItem(searchCompletion: searchCompletion, placemark: placemark)
+                    
+                    switch textField.textFieldType {
+                        case .departure: self.departure = place
+                        case .destination: self.destination = place
+                    }
                 }
-                
-                self.updateTextFields()
+
                 self.activeSearchTextField?.endEditing(true)
+                self.updateTextFields()
+
+            }
+        }
+        if section == 2 {
+            if let textField = activeSearchTextField as? SearchTextField {
+                guard let cell = tableView.cellForRow(at: indexPath) as? AddressCell else { return }
+                if let place = favouritesDataManager.getFavouritePlace(cell.mainLabel.text ?? "") {
+                    switch textField.textFieldType {
+                    case .departure: self.departure = place
+                    case .destination: self.destination = place
+                    
+                    textField.endEditing(true)
+                    updateTextFields()
+                    }
+                }
+            } else {
                 
             }
         }

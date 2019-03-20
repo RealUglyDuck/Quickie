@@ -61,8 +61,8 @@ class AddressCell: UITableViewCell {
     
     func configureCell(place: PlaceItem) {
         self.place = place
-        mainLabel.text = place.name
-        detailsLabel.text = place.detailedName
+        mainLabel.text = place.title
+        detailsLabel.text = place.subtitle
     }
     
     required init?(coder aDecoder: NSCoder) {

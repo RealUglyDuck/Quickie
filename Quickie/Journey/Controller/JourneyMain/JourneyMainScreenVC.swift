@@ -31,7 +31,7 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     lazy var departureTextField: SearchTextField = {
         let departure = SearchTextField(type: .departure)
         departure.placeholder = "Departure"
-        departure.text = self.departure?.name
+        departure.text = self.departure?.title
         departure.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         departure.mapButton.addTarget(self, action: #selector(presentMapSearchVC(sender:)), for: .touchUpInside)
         departure.textFieldType = .departure
@@ -67,7 +67,7 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fetchJSON()
         setupNavigationControllerApperance()
         setupViews()
         setupTableView()
@@ -135,7 +135,6 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     func updateTableViewResultsFrom(_ textField: UITextField) {
         if let text = textField.text, text != "" {
             searchCompleter.queryFragment = text
-            print(searchCompleter.results)
             print("RESULTS COUNT: \(searchCompleter.results.count)")
         } else {
             tableView.reloadData()
@@ -143,8 +142,8 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     }
     
     func updateTextFields() {
-        departureTextField.text = departure?.name
-        destinationTextField.text = destination?.name
+        departureTextField.text = departure?.title
+        destinationTextField.text = destination?.title
     }
     
     // MARK: ------------- SETUPS
@@ -163,7 +162,7 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
         
         guard let departure = departure, let destination = destination else { return }
         
-        if departure.name == "" || destination.name == "" {
+        if departure.title == "" || destination.title == "" {
             return
         }
         
@@ -175,7 +174,7 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
         searchCompleter.delegate = self
         
         let location = locationManager.location
-        searchCompleter.region = MKCoordinateRegion.init(center: (location?.coordinate) ?? LocationDatabase.londonLocation , latitudinalMeters: 10000, longitudinalMeters: 10000)
+        searchCompleter.region = MKCoordinateRegion.init(center: (location?.coordinate) ?? LocationDatabase.londonLocation , latitudinalMeters: 100, longitudinalMeters: 100)
     }
     
     func setupTextFields() {
@@ -292,6 +291,8 @@ extension JourneyMainScreenVC: PlaceSelectionDelegate {
 extension JourneyMainScreenVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("Begin editing")
+        updateTextFields()
         activeSearchTextField = textField
         activeSearchTextField?.text = ""
         updateTableViewResultsFrom(textField)
@@ -306,6 +307,33 @@ extension JourneyMainScreenVC: UITextFieldDelegate {
         tableView.reloadData()
     }
 
+    func fetchJSON() {
+        let urlString = "https://api.tfl.gov.uk/Journey/JourneyResults/sw113js/to/e179at?app_id=e171df45&app_key=bb0047f1885b728ca89b5274dee61460"
+        guard let url = URL(string: urlString) else { return }
+        print(url)
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            print(response)
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("error reading data \(error)")
+                    return
+                }
+                
+                guard let data = data else { return }
+                var journeys: Journeys?
+                do {
+                    let decoder = JSONDecoder()
+                    journeys = try decoder.decode(Journeys.self, from: data)
+                    print(journeys)
+                    
+                } catch let jsonError {
+                    print("Failed to decode: \(jsonError)")
+                }
+            }
+        }.resume()
+        print("completion not run")
+    }
+    
 }
 
 

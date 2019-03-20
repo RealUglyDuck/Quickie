@@ -22,14 +22,14 @@ class JourneyOptionsVC: UIViewController {
     lazy var departureTextField: SearchTextField = {
         let departure = SearchTextField(type: .departure)
         departure.placeholder = "Departure"
-        departure.text = self.departure?.name
+        departure.text = self.departure?.title
         departure.isEnabled = false
         return departure
     }()
     
     lazy var destinationTextField: SearchTextField = {
         let destination = SearchTextField(type: .destination)
-        destination.text = self.destination?.name
+        destination.text = self.destination?.title
         destination.isEnabled = false
         return destination
     }()
@@ -67,8 +67,8 @@ class JourneyOptionsVC: UIViewController {
     }
     
     func updateTextFields() {
-        departureTextField.text = self.departure?.name
-        destinationTextField.text = self.destination?.name
+        departureTextField.text = self.departure?.title
+        destinationTextField.text = self.destination?.title
     }
     
     func setupNavigationControllerApperance() {
