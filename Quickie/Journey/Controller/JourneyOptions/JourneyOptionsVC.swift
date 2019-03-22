@@ -12,6 +12,8 @@ class JourneyOptionsVC: UIViewController {
 
     let departure: PlaceItem?
     let destination: PlaceItem?
+    var attributedString = NSMutableAttributedString()
+    var journeysDataManager: JourneysDataManager?
     
     let searchBar: UIView = {
         let bar = UIView()
@@ -56,6 +58,7 @@ class JourneyOptionsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchJSON()
         setupTableView()
         setupViews()
         updateTextFields()
@@ -103,6 +106,41 @@ class JourneyOptionsVC: UIViewController {
         _ = destinationTextField.constraintAnchors(top: nil, leading: searchBar.leadingAnchor, trailing: searchBar.trailingAnchor, bottom: searchBar.bottomAnchor, topDistance: 0, leftDistance: 30, rightDistance: 9, bottomDistance: 9, height: 40, width: nil)
         
         _ = tableView.constraintWithDistanceTo(top: searchBar.bottomAnchor, leading: view.leadingAnchor, trailing: view.trailingAnchor, bottom: view.bottomAnchor, topDistance: 10, leftDistance: 15, rightDistance: 15, bottomDistance: 0)
+    }
+    
+    func fetchJSON() {
+        
+        let destinationCoordinates = "\(destination!.coordinate.latitude)%2C\(destination!.coordinate.longitude)"
+        let departureCoordinates = "\(departure!.coordinate.latitude)%2C\(departure!.coordinate.longitude)"
+        
+        
+        let urlString = "https://api.tfl.gov.uk/Journey/JourneyResults/\(departureCoordinates)/to/\(destinationCoordinates)?mode=bus%2Ctube&app_id=e171df45&app_key=bb0047f1885b728ca89b5274dee61460"
+        guard let url = URL(string: urlString) else { return }
+        print(url)
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("error reading data \(error)")
+                    return
+                }
+                
+                guard let data = data else { return }
+                var journeys: JourneysData?
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+                    journeys = try decoder.decode(JourneysData.self, from: data)
+                    print(journeys ?? "")
+                    guard let journeys = journeys else { return }
+                    self.journeysDataManager = JourneysDataManager(journeysData: journeys)
+                    self.tableView.reloadData()
+                    
+                } catch let jsonError {
+                    print("Failed to decode: \(jsonError)")
+                }
+            }
+            }.resume()
+        print("completion not run")
     }
 
 }

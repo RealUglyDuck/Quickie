@@ -19,7 +19,8 @@
 		AE690CFF223E9BC300BF5339 /* NearbyLocationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE690CFE223E9BC300BF5339 /* NearbyLocationsVC.swift */; };
 		AE690D02223EA0A200BF5339 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE690D01223EA0A200BF5339 /* MapKit.framework */; };
 		AE690D04223EA21800BF5339 /* NearbyAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE690D03223EA21800BF5339 /* NearbyAnnotation.swift */; };
-		AE690D0822426D6300BF5339 /* Journeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE690D0722426D6300BF5339 /* Journeys.swift */; };
+		AE690D0822426D6300BF5339 /* JourneysData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE690D0722426D6300BF5339 /* JourneysData.swift */; };
+		AE690D112242A01600BF5339 /* JourneysDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE690D102242A01600BF5339 /* JourneysDataManager.swift */; };
 		AEAA398722247C4200D50A46 /* MapSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAA398622247C4200D50A46 /* MapSearchVC.swift */; };
 		AEAA398D222857BA00D50A46 /* PlaceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAA398C222857BA00D50A46 /* PlaceItem.swift */; };
 		AED8EC9022172AF10049D80C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED8EC8F22172AF10049D80C /* AppDelegate.swift */; };
@@ -54,7 +55,8 @@
 		AE690CFE223E9BC300BF5339 /* NearbyLocationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyLocationsVC.swift; sourceTree = "<group>"; };
 		AE690D01223EA0A200BF5339 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AE690D03223EA21800BF5339 /* NearbyAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyAnnotation.swift; sourceTree = "<group>"; };
-		AE690D0722426D6300BF5339 /* Journeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journeys.swift; sourceTree = "<group>"; };
+		AE690D0722426D6300BF5339 /* JourneysData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneysData.swift; sourceTree = "<group>"; };
+		AE690D102242A01600BF5339 /* JourneysDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneysDataManager.swift; sourceTree = "<group>"; };
 		AEAA398622247C4200D50A46 /* MapSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchVC.swift; sourceTree = "<group>"; };
 		AEAA398C222857BA00D50A46 /* PlaceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceItem.swift; sourceTree = "<group>"; };
 		AED8EC8C22172AF10049D80C /* Quickie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quickie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,7 +143,8 @@
 				AEAA398C222857BA00D50A46 /* PlaceItem.swift */,
 				AEF2A99B2234748C00D4ED61 /* FavouritesDataManager.swift */,
 				AE690D03223EA21800BF5339 /* NearbyAnnotation.swift */,
-				AE690D0722426D6300BF5339 /* Journeys.swift */,
+				AE690D0722426D6300BF5339 /* JourneysData.swift */,
+				AE690D102242A01600BF5339 /* JourneysDataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -416,8 +419,9 @@
 			files = (
 				AE5CDFE1221B36D3003C40D8 /* JourneyMainTableView.swift in Sources */,
 				AED8EC9422172AF10049D80C /* StopsMainScreenVC.swift in Sources */,
-				AE690D0822426D6300BF5339 /* Journeys.swift in Sources */,
+				AE690D0822426D6300BF5339 /* JourneysData.swift in Sources */,
 				AEE8F1CA222FE2BB0035D176 /* JourneyMainSearchCompleter.swift in Sources */,
+				AE690D112242A01600BF5339 /* JourneysDataManager.swift in Sources */,
 				AEF2A99C2234748C00D4ED61 /* FavouritesDataManager.swift in Sources */,
 				AEF2A98D2231945800D4ED61 /* LocationDatabase.swift in Sources */,
 				AED8ECA82217376E0049D80C /* ImageDatabase.swift in Sources */,

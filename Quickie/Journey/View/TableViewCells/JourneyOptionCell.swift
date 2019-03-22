@@ -51,6 +51,7 @@ class JourneyOptionCell: UITableViewCell {
         setupViews()
         layer.masksToBounds = false
         selectionStyle = .none
+        backgroundColor = .clear
     }
     
     

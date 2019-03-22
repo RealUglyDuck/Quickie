@@ -8,31 +8,31 @@
 
 import UIKit
 
-struct Journeys: Codable {
+struct JourneysData: Decodable {
     var journeys: [Journey]
 }
 
-struct Journey: Codable {
-    var startDateTime: String
-    var arrivalDateTime: String
+struct Journey: Decodable {
+    var startDateTime: Date?
+    var arrivalDateTime: Date?
     var duration: Int
     var legs: [Leg]
-    var fare: Fare
+    var fare: Fare?
 }
 
-struct Leg: Codable {
+struct Leg: Decodable {
     var mode: Mode
     var routeOptions: [Route]
 }
 
-struct Mode: Codable {
+struct Mode: Decodable {
+    var name: TransportTypes
+}
+
+struct Route: Decodable {
     var name: String
 }
 
-struct Route: Codable {
-    var name: String
-}
-
-struct Fare: Codable {
+struct Fare: Decodable {
     var totalCost: Int
 }

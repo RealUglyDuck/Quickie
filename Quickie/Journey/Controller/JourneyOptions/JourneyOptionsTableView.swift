@@ -10,23 +10,29 @@ import UIKit
 
 extension JourneyOptionsVC: UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if journeysDataManager != nil {
+            return 1
+        } else {
+            return 0
+        }
     }
 }
 
 extension JourneyOptionsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        guard let journeyManager = self.journeysDataManager else { return 0 }
+        return journeyManager.journeysData.journeys.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIDs.journeyOptionCellID, for: indexPath) as? JourneyOptionCell else {
             return UITableViewCell()
         }
-        cell.mainLabel.text = "170 | Victoria"
-        cell.detailsLabel.text = "19:15 - Arrive at: 19:15 £3.90"
-        cell.totalTimeLabel.text = "39 mins"
-        
+        guard let journeyManager = self.journeysDataManager else { return UITableViewCell() }
+        cell.mainLabel.attributedText = journeyManager.generateMainLabelString(for: indexPath.row)
+        cell.detailsLabel.text = journeyManager.generateDetailsLabelString(for: indexPath.row)
+        cell.totalTimeLabel.text = "\(journeyManager.journeysData.journeys[indexPath.row].duration) mins"
+        cell.mainLabel.font = UIFont.systemFont(ofSize: 14)
         return cell
     }
     

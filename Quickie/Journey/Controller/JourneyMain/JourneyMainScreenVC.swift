@@ -67,7 +67,7 @@ class JourneyMainScreenVC: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchJSON()
+        
         setupNavigationControllerApperance()
         setupViews()
         setupTableView()
@@ -305,33 +305,6 @@ extension JourneyMainScreenVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         activeSearchTextField = nil
         tableView.reloadData()
-    }
-
-    func fetchJSON() {
-        let urlString = "https://api.tfl.gov.uk/Journey/JourneyResults/sw113js/to/e179at?app_id=e171df45&app_key=bb0047f1885b728ca89b5274dee61460"
-        guard let url = URL(string: urlString) else { return }
-        print(url)
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            print(response)
-            DispatchQueue.main.async {
-                if let error = error {
-                    print("error reading data \(error)")
-                    return
-                }
-                
-                guard let data = data else { return }
-                var journeys: Journeys?
-                do {
-                    let decoder = JSONDecoder()
-                    journeys = try decoder.decode(Journeys.self, from: data)
-                    print(journeys)
-                    
-                } catch let jsonError {
-                    print("Failed to decode: \(jsonError)")
-                }
-            }
-        }.resume()
-        print("completion not run")
     }
     
 }
